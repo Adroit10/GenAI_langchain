@@ -1,20 +1,13 @@
-from langchain_huggingface import ChatHuggingFace
+from langchain_openai import ChatOpenAI
 import os
 import certifi
 from typing import TypedDict, Annotated,Literal,Optional
 os.environ['SSL_CERT_FILE'] = certifi.where()
 from dotenv import load_dotenv
 load_dotenv()
-#os.environ['HF_HOME'] = 'D:/huggingface_cache'
 
-model = ChatHuggingFace.from_model_id(
-    model_id="HuggingFaceTB/SmolLM2-360M-Instruct",
-        task="text-generation",
-        pipeline_kwargs={
-            "max_new_tokens": 128,
-            "temperature": 0.7,
-        },
-)
+
+model = ChatOpenAI(model='gpt-4',temperature=0.5,max_completion_tokens=20)
 
 
 class Review(TypedDict):
